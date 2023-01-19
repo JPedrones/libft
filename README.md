@@ -1,6 +1,6 @@
 ## libft
 
-O projeto libft consiste em criar do zero a biblioteca que será usado no desenvolvimento dos próximos projetos, para cria-lo foi descrito para clonar algumas funções já existentes e criar algumas novas, seguindo diversas limitações.
+O projeto libft consiste em criar do zero a biblioteca que será usado no desenvolvimento dos próximos projetos da 42SP, para cria-lo foi descrito para clonar algumas funções já existentes e criar algumas novas, seguindo diversas limitações.
 
 ## get_next_line
 
