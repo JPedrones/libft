@@ -6,7 +6,7 @@
 /*   By: joapedr2 < joapedr2@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 23:20:09 by joapedr2          #+#    #+#             */
-/*   Updated: 2023/01/19 17:31:04 by joapedr2         ###   ########.fr       */
+/*   Updated: 2022/12/26 18:29:02 by joapedr2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ typedef enum e_boolean
 	FALSE,
 	TRUE
 }	t_boolean;
+
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}	t_list;
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);

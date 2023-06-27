@@ -3,73 +3,69 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joapedr2 <jpedrones@hotmail.com>           +#+  +:+       +#+        */
+/*   By: joapedr2 < joapedr2@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 13:35:14 by joapedr2          #+#    #+#             */
-/*   Updated: 2022/07/11 23:34:00 by joapedr2         ###   ########.fr       */
+/*   Updated: 2023/03/23 10:32:42 by joapedr2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*get_line(char **bkp)
+static char	*get_line(t_line *l)
 {
 	char	*line;
-	int		len;
+	t_char	*aux;
+	int		i;
 
-	len = 0;
-	if (!(*bkp) || !(**bkp))
+	i = -1;
+	if (l->begin == NULL)
 		return (NULL);
-	while ((*bkp)[len] != '\n' && (*bkp)[len])
-		len++;
-	line = ft_substr(*bkp, 0, (len + 1));
+	line = malloc(sizeof(char) * l->size + 1);
+	if (!line)
+		return (NULL);
+	aux = l->begin;
+	while (aux)
+	{
+		line[++i] = aux->c;
+		aux = aux->next;
+	}
+	line[++i] = '\0';
 	return (line);
 }
 
-static void	get_buffer(int fd, char **bkp)
+static t_line	*get_buffer(int fd)
 {
-	char	*buffer;
-	char	*temp;
-	int		readed;
+	t_line	*l;
+	char	buffer[1];
 
-	buffer = (char *)malloc(BUFFER_SIZE + 1);
-	if (!buffer)
-		return ;
-	readed = 0;
-	while (!ft_strchr(*bkp, '\n'))
+	l = (t_line *)malloc(sizeof(t_line));
+	l->size = 0;
+	l->begin = NULL;
+	while (read(fd, buffer, 1) > 0)
 	{
-		readed = read(fd, buffer, BUFFER_SIZE);
-		if (readed <= 0)
+		if (!t_char_new_node(buffer, &(l)->begin))
+		{
+			ft_printf("entrou\n");
+			t_line_free(&l);
+			return (NULL);
+		}
+		l->size++;
+		if (buffer[0] == '\n')
 			break ;
-		buffer[readed] = '\0';
-		temp = *bkp;
-		*bkp = ft_strjoin((*bkp), buffer);
-		free(temp);
 	}
-	if (readed <= 0 && !(**bkp))
-	{
-		free(*bkp);
-		*bkp = NULL;
-	}
-	free(buffer);
+	return (l);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*backup[FD_MAX];
-	char		*temp;
-	char		*line;
+	t_line	*l;
+	char	*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0)
 		return (NULL);
-	if (!backup[fd])
-		backup[fd] = ft_strdup("");
-	get_buffer(fd, &backup[fd]);
-	line = get_line(&backup[fd]);
-	if (line == NULL)
-		return (NULL);
-	temp = backup[fd];
-	backup[fd] = ft_strdup(backup[fd] + ft_strlen(line));
-	free(temp);
+	l = get_buffer(fd);
+	line = get_line(l);
+	t_line_free(&l);
 	return (line);
 }
