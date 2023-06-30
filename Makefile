@@ -14,6 +14,7 @@ SRCS		=	$(CHECKERS)/ft_isalnum.c			$(CHECKERS)/ft_isalpha.c		\
 				$(CONVERSORS)/ft_atoi.c				$(CONVERSORS)/ft_itoa.c			\
 				$(CONVERSORS)/ft_tolower.c			$(CONVERSORS)/ft_toupper.c		\
 				$(CONVERSORS)/ft_utoa_base.c		$(CONVERSORS)/ft_utoa.c			\
+				$(CONVERSORS)/ft_atol.c				\
 				$(MEMORY)/ft_bzero.c				$(MEMORY)/ft_calloc.c			\
 				$(MEMORY)/ft_memchr.c				$(MEMORY)/ft_memcmp.c			\
 				$(MEMORY)/ft_memcpy.c				$(MEMORY)/ft_memmove.c			\

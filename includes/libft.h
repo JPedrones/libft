@@ -6,7 +6,7 @@
 /*   By: joapedr2 < joapedr2@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 23:20:09 by joapedr2          #+#    #+#             */
-/*   Updated: 2022/12/26 18:29:02 by joapedr2         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:23:06 by joapedr2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ char	*ft_utoa(unsigned int n);
 char	*ft_utoa_base(unsigned long int n, char *buffer);
 void	ft_putchar(char c);
 void	ft_putstr(char *str);
+long	ft_atol(const char *str);
 
 #endif // LIBFT_H
